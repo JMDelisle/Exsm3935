@@ -11,7 +11,7 @@ async function main() {
                 while (!theirName) {
 
                     let firstName = await input("Please enter your first name: ");
-                    theirName = checkName(firstName)
+                    theirName = checkName(firstName);
 
                     if (!theirName) {
                         output("Your first name contained numeric. Please re-enter your name without a numeric! ");
@@ -25,7 +25,7 @@ async function main() {
                 while (!theirName2) {
 
                     let lastName = await input("Please enter your last name: ");
-                    theirName2 = checkName(lastName)
+                    theirName2 = checkName(lastName);
 
                     if (!theirName2) {
                         output("Your last name contained numeric. Please re-enter your name without a numeric! ");
@@ -38,7 +38,7 @@ async function main() {
                 while (!theirAddress) {
 
                     let year = await input("Please enter your adress: ");
-                    theirAddress = validateMail(year)
+                    theirAddress = validateMail(year);
 
                     if (!theirAddress) {
                         output("Not a valid address: ");
@@ -47,31 +47,21 @@ async function main() {
                     }
                 }
 
-                let theirYear = false;
-                while (!theirYear) {
+                let theirModel = false;
+                while (!theirModel) {
 
-                    let year = await input("Please enter a date in the format YYYY-MM-DD: ");
-                    theirYear = checkDate(year)
+                    let model = await input("Please enter model of the vehicle: ");
+                    theirModel = checkModel(model);
 
-                    if (!theirYear) {
-                        output("Not a date! No month above 12 or days above 31: ");
+                    if (!theirModel) {
+                        output("Is not a valid Model! Please selecta valid model: ");
                     } else {
-                        output("Your purchased date input: " + year);
+                        output("Your first name is: " + model);
                     }
                 }
 
-                let carBrand = false;
-                while (!carBrand) {
 
-                    let year = await input("Please select your car brand: ");
-                    carBrand = checkBrand(year)
 
-                    if (!carBrand) {
-                        output("Not a valid brand! Please pick a valid brand:");
-                    } else {
-                        output("Your purchased date input: " + year);
-                    }
-                }
 
 
 
@@ -129,18 +119,6 @@ async function main() {
 
     while (userChoice != 3);
 
-    function checkName(nameCheck) {
-        let nameValue = true;
-        const searchName = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
-        for (item of searchName) {
-            if (nameCheck.includes(item)) {
-                nameValue = false;
-            }
-        }
-        return nameValue;
-    }
-
     function checkYear(inputValue)
     // Take in a string from the user, return true if it is a number between 1900 and the current year, or false if it isn't.
     {
@@ -189,15 +167,27 @@ async function main() {
     }
 
 
+    function validateMail(mailAdress) {
+        let mailValue = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (mailAdress.match(mailValue)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function checkModel(nameCheck) {
+        let nameValue = false;
+        const searchName = ["chevrolet", "ford", "gmc", "kia", "bmw", "volvo", "saab", "mitsubishi"];
+
+        for (item of searchName) {
+            if (nameCheck.toLowerCase().includes(item)) {
+                nameValue = true;
+            }
+        }
+        return nameValue;
+    }
 
 
-    function validateMail (emailAdress)
-    {
-      let mailValue = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      if (emailAdress.match(mailValue)) {
-        return false; 
-      } else {
-        return true; 
-      }
-    }    
+
 }
