@@ -89,56 +89,18 @@ async function main() {
                     }
                 }
 
-                let theirYear = false;
-                while (!theirYear) {
+                let vehicleVin = false;
+                while (!vehicleVin) {
 
-                    let years = await input("Please enter year of the vehicle: ");
-                    theirYear = checkYear(years);
+                    let vins = await input("Please enter your VIN: ");
+                    vehicleVin = carVin(vins);
 
-                    if (!theirYear) {
-                        output("Must be a valid year betwen 1990 and the present year plus one: ");
+                    if (!vehicleVin) {
+                        output("Must be a valid VIN using only numerical or alphabetic: ");
                     } else {
-                        output("Your vehicle is: " + years);
+                        output("Your vehicle is: " + vins);
                     }
                 }
-
-                let theirVin = false;
-                while (!theirVin) {
-
-                    let vins = await input("Please enter your VIN number: ");
-                    theirVin= carVin(vins);
-
-                    if (!theirVin) {
-                        output("Must be excatly 17 characters long!: ");
-                    } else {
-                        output("Your VIN is: " + vins);
-                    }
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                 break;
@@ -170,7 +132,7 @@ async function main() {
     }
 
     while (userChoice != 3);
-
+/*------------------------------------------------------------*/
 
     function checkDate(inputValue)
     // Take in a string from the user, return true if it is a date in the format YYYY-MM-DD where MM<=12 and DD<=31, and false if it isn't.
@@ -237,23 +199,22 @@ async function main() {
     }
 
 
-    function checkYear(inputValue)
-    {
+    function checkYear(inputValue) {
         return Number(inputValue) >= 1900 && Number(inputValue <= new Date().getFullYear());
     }
 
     function carVin(inputValue) {
-        let nameValue = false;
-        const searchName = ("")
-        
-        for (item of searchName)
-        if (inputValue.toUpperCase().includes(item)){
-            nameValue = true;
+        let nameValue = true;
+
+        if (inputValue.length != 17) {
+            nameValue = false;
+        } else if (inputValue.match("^[A-Z0-9]*$") == null); {
+
         }
-    return nameValue;
-        
-        
-        
+        return nameValue;
+
+
+
     }
-    
+
 }
