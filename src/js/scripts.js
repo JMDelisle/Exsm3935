@@ -37,7 +37,7 @@ async function main() {
                 let theirAddress = false;
                 while (!theirAddress) {
 
-                    let year = await input("Please enter your adress: ");
+                    let year = await input("Please enter your address: ");
                     theirAddress = validateMail(year);
 
                     if (!theirAddress) {
@@ -47,21 +47,73 @@ async function main() {
                     }
                 }
 
-                let theirModel = false;
-                while (!theirModel) {
+                let dateOfPurchase = false;
+                while (!dateOfPurchase) {
 
-                    let model = await input("Please enter model of the vehicle: ");
-                    theirModel = checkModel(model);
+                    let purchaseDate = await input("Please enter your purchase date YYYY-MM-DD: ");
+                    dateOfPurchase = checkDate(purchaseDate);
 
-                    if (!theirModel) {
-                        output("Is not a valid Model! Please selecta valid model: ");
+                    if (!dateOfPurchase) {
+                        output("That is not a valid date:");
                     } else {
-                        output("Your first name is: " + model);
+                        output("Your first name is: " + purchaseDate);
                     }
                 }
 
 
 
+                let theirBrand = false;
+                while (!theirBrand) {
+
+                    let brand = await input("Please enter brand of the vehicle: ");
+                    theirBrand = checkBrand(brand);
+
+                    if (!theirBrand) {
+                        output("Is not a valid brand! Please selecta valid brand: ");
+                    } else {
+                        output("Your first name is: " + brand);
+                    }
+                }
+
+
+                let vehicleModel = false;
+                while (!vehicleModel) {
+
+                    let models = await input("Please choose your Model you've selected: ");
+                    vehicleModel = checkMake(models)
+
+                    if (!vehicleModel) {
+                        output("Not a brand, please select the right brand: ");
+                    } else {
+                        output("Your preferred brand is: " + models);
+                    }
+                }
+
+                let theirYear = false;
+                while (!theirYear) {
+
+                    let years = await input("Please enter year of the vehicle: ");
+                    theirYear = checkYear(years);
+
+                    if (!theirYear) {
+                        output("Must be a valid year betwen 1990 and the present year plus one: ");
+                    } else {
+                        output("Your vehicle is: " + years);
+                    }
+                }
+
+                let theirVin = false;
+                while (!theirVin) {
+
+                    let vins = await input("Please enter your VIN number: ");
+                    theirVin= carVin(vins);
+
+                    if (!theirVin) {
+                        output("Must be excatly 17 characters long!: ");
+                    } else {
+                        output("Your VIN is: " + vins);
+                    }
+                }
 
 
 
@@ -119,19 +171,6 @@ async function main() {
 
     while (userChoice != 3);
 
-    function checkYear(inputValue)
-    // Take in a string from the user, return true if it is a number between 1900 and the current year, or false if it isn't.
-    {
-        /*
-        let outputValue = false;
-        if (Number(inputValue) >= 1900 && Number(inputValue <= new Date().getFullYear()))
-        {
-            outputValue = true;
-        }
-        return outputValue;
-        */
-        return Number(inputValue) >= 1900 && Number(inputValue <= new Date().getFullYear());
-    }
 
     function checkDate(inputValue)
     // Take in a string from the user, return true if it is a date in the format YYYY-MM-DD where MM<=12 and DD<=31, and false if it isn't.
@@ -176,7 +215,7 @@ async function main() {
         }
     }
 
-    function checkModel(nameCheck) {
+    function checkBrand(nameCheck) {
         let nameValue = false;
         const searchName = ["chevrolet", "ford", "gmc", "kia", "bmw", "volvo", "saab", "mitsubishi"];
 
@@ -188,6 +227,33 @@ async function main() {
         return nameValue;
     }
 
+    function checkMake(theirMake) {
+        let makeValue = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (theirMake.match(makeValue)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 
+    function checkYear(inputValue)
+    {
+        return Number(inputValue) >= 1900 && Number(inputValue <= new Date().getFullYear());
+    }
+
+    function carVin(inputValue) {
+        let nameValue = false;
+        const searchName = ("")
+        
+        for (item of searchName)
+        if (inputValue.toUpperCase().includes(item)){
+            nameValue = true;
+        }
+    return nameValue;
+        
+        
+        
+    }
+    
 }
