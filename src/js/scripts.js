@@ -38,13 +38,12 @@ async function main() {
                 while (!theirAddress) {
 
                     let year = await input("Please enter your adress: ");
-                    theirAddress = validCharForStreetAddress(year)
+                    theirAddress = validateMail(year)
 
                     if (!theirAddress) {
                         output("Not a valid address: ");
                     } else {
                         output("Your address is: " + year);
-                        output()
                     }
                 }
 
@@ -55,11 +54,50 @@ async function main() {
                     theirYear = checkDate(year)
 
                     if (!theirYear) {
-                        output("Not a date! Pick a range from ");
+                        output("Not a date! No month above 12 or days above 31: ");
                     } else {
                         output("Your purchased date input: " + year);
                     }
                 }
+
+                let carBrand = false;
+                while (!carBrand) {
+
+                    let year = await input("Please select your car brand: ");
+                    carBrand = checkBrand(year)
+
+                    if (!carBrand) {
+                        output("Not a valid brand! Please pick a valid brand:");
+                    } else {
+                        output("Your purchased date input: " + year);
+                    }
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 break;
 
@@ -138,7 +176,28 @@ async function main() {
         return outputValue;
     }
 
-    function validCharForStreetAddress(c) {
-        return ",#-/ !@$%^*(){}|[]\\".indexOf(c) >= 0;
+    function checkName(nameCheck) {
+        let nameValue = true;
+        const searchName = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+        for (item of searchName) {
+            if (nameCheck.includes(item)) {
+                nameValue = false;
+            }
+        }
+        return nameValue;
     }
+
+
+
+
+    function validateMail (emailAdress)
+    {
+      let mailValue = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      if (emailAdress.match(mailValue)) {
+        return false; 
+      } else {
+        return true; 
+      }
+    }    
 }
