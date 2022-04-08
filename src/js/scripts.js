@@ -1,31 +1,36 @@
 async function main() {
-
     let userChoice;
     do {
         output("1. Create a new profile:\n2. View previous profile:\n3. Quit application:")
-        userChoice = await input("Please select an option:")
+        let userChoice = await input("Please select an option:");
+        let nameArray = [];
 
         switch (Number(userChoice)) {
             case 1:
+                //FirstName
                 let theirName = false;
                 while (!theirName) {
 
                     let firstName = await input("Please enter your first name: ");
                     theirName = checkName(firstName);
+                    nameArray.push(firstName);
 
                     if (!theirName) {
                         output("Your first name contained numeric. Please re-enter your name without a numeric! ");
+
                     } else {
                         output("Your first name is: " + firstName);
+
                     }
                 }
 
-
+                //LastName
                 let theirName2 = false;
                 while (!theirName2) {
 
                     let lastName = await input("Please enter your last name: ");
                     theirName2 = checkName(lastName);
+                    nameArray.push(lastName);
 
                     if (!theirName2) {
                         output("Your last name contained numeric. Please re-enter your name without a numeric! ");
@@ -33,54 +38,59 @@ async function main() {
                         output("Your last name is: " + lastName);
                     }
                 }
-
+                //Address
                 let theirAddress = false;
                 while (!theirAddress) {
 
-                    let year = await input("Please enter your address: ");
-                    theirAddress = validateMail(year);
+                    let address = await input("Please enter your address: ");
+                    theirAddress = validateMail(address);
+                    nameArray.push(address);
 
                     if (!theirAddress) {
                         output("Not a valid address: ");
+
                     } else {
-                        output("Your address is: " + year);
+                        output("Your address is: " + address);
                     }
                 }
-
+                //DateOfPurchase
                 let dateOfPurchase = false;
                 while (!dateOfPurchase) {
 
                     let purchaseDate = await input("Please enter your purchase date YYYY-MM-DD: ");
                     dateOfPurchase = checkDate(purchaseDate);
+                    nameArray.push(purchaseDate);
 
                     if (!dateOfPurchase) {
                         output("That is not a valid date:");
                     } else {
-                        output("Your first name is: " + purchaseDate);
+                        output("Your purchase date is: " + purchaseDate);
                     }
                 }
 
 
-
+                //Brand
                 let theirBrand = false;
                 while (!theirBrand) {
 
                     let brand = await input("Please enter brand of the vehicle: ");
                     theirBrand = checkBrand(brand);
+                    nameArray.push(brand);
 
                     if (!theirBrand) {
                         output("Is not a valid brand! Please selecta valid brand: ");
                     } else {
-                        output("Your first name is: " + brand);
+                        output("Your preferred brand is: " + brand);
                     }
                 }
 
-
+                //Model
                 let vehicleModel = false;
                 while (!vehicleModel) {
 
                     let models = await input("Please choose your Model you've selected: ");
-                    vehicleModel = checkMake(models)
+                    vehicleModel = checkMake(models);
+                    nameArray.push(models);
 
                     if (!vehicleModel) {
                         output("Not a brand, please select the right brand: ");
@@ -88,41 +98,54 @@ async function main() {
                         output("Your preferred brand is: " + models);
                     }
                 }
+                // Client Year
+                let theirYear = false;
+                while (!theirYear) {
 
+                    let clientYear = await input("Please enter car year: YYYY-MM-DD: ");
+                    theirYear = checkDate(clientYear);
+                    nameArray.push(clientYear);
+
+                    if (!theirYear) {
+                        output("Not a date! No month above 12 or days above 31: ");
+                    } else {
+                        output("Your purchased date input: " + clientYear);
+                    }
+                }
+
+                
+                //VehicleVin
                 let vehicleVin = false;
                 while (!vehicleVin) {
 
                     let vins = await input("Please enter your VIN: ");
                     vehicleVin = carVin(vins);
+                    nameArray.push(vins);
 
                     if (!vehicleVin) {
                         output("Must be a valid VIN using only numerical or alphabetic: ");
                     } else {
-                        output("Your vehicle is: " + vins);
+                        output("Your vehicle VIN is: " + vins);
                     }
                 }
-
-
                 break;
 
             case 2:
-                let userPrevious = await input("Please enter a number: ");
-                // Take in a string from the user, return false if it contains any non-numeric characters or true if it doesnt.
-                if (!checkNumber(userPrevious)) {
-                    output("Not a number!");
+
+
+                for (let i = 1; i <= 10; i++) {
+                    nameArray.push(nameArray[0]);
                 }
 
-                let theirAddre = await input("Please enter your address:");
-                while (checkAddress(theirAddre)) {
-                    output("That is not a mailing address! Please try again!");
+                for (row of nameArray) {
+                    output(row)
                 }
-
 
                 break;
 
 
             case 3:
-                output("Goodbye!");
+                output("Have a good day!");
                 break;
 
             default:
@@ -132,7 +155,14 @@ async function main() {
     }
 
     while (userChoice != 3);
-/*------------------------------------------------------------*/
+
+
+
+
+
+
+
+    /*------------------------------------------------------------*/
 
     function checkDate(inputValue)
     // Take in a string from the user, return true if it is a date in the format YYYY-MM-DD where MM<=12 and DD<=31, and false if it isn't.
@@ -200,8 +230,10 @@ async function main() {
 
 
     function checkYear(inputValue) {
+        let outputValue = false;
+        
         return Number(inputValue) >= 1900 && Number(inputValue <= new Date().getFullYear());
-    }
+    } 
 
     function carVin(inputValue) {
         let nameValue = true;
@@ -212,9 +244,7 @@ async function main() {
 
         }
         return nameValue;
-
-
-
     }
+
 
 }

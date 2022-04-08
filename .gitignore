@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,windows,macos,linux
-# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,windows,macos,linux
+# Created by https://www.toptal.com/developers/gitignore/api/macos,windows,linux,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,windows,linux,visualstudiocode
 
 ### Linux ###
 *~
@@ -10,7 +10,7 @@
 
 # KDE directory preferences
 .directory
-
+debug.log
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
@@ -52,10 +52,13 @@ Temporary Items
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-*.code-workspace
+!.vscode/*.code-snippets
 
 # Local History for Visual Studio Code
 .history/
+
+# Built Visual Studio Code Extensions
+*.vsix
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
@@ -63,7 +66,6 @@ Temporary Items
 .ionide
 
 # Support for Project snippet scope
-!.vscode/*.code-snippets
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -91,4 +93,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,windows,macos,linux
+# End of https://www.toptal.com/developers/gitignore/api/macos,windows,linux,visualstudiocode
