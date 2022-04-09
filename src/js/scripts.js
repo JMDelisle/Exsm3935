@@ -1,9 +1,11 @@
 async function main() {
     let userChoice;
+    let clientArray = [];
+
     do {
         output("1. Create a new profile:\n2. View previous profile:\n3. Quit application:")
         let userChoice = await input("Please select an option:");
-        let nameArray = [];
+        
 
         switch (Number(userChoice)) {
             case 1:
@@ -13,7 +15,7 @@ async function main() {
 
                     let firstName = await input("Please enter your first name: ");
                     theirName = checkName(firstName);
-                    nameArray.push(firstName);
+                    clientArray.push(firstName);
 
                     if (!theirName) {
                         output("Your first name contained numeric. Please re-enter your name without a numeric! ");
@@ -30,7 +32,7 @@ async function main() {
 
                     let lastName = await input("Please enter your last name: ");
                     theirName2 = checkName(lastName);
-                    nameArray.push(lastName);
+                    clientArray.push(lastName);
 
                     if (!theirName2) {
                         output("Your last name contained numeric. Please re-enter your name without a numeric! ");
@@ -44,7 +46,7 @@ async function main() {
 
                     let address = await input("Please enter your address: ");
                     theirAddress = validateMail(address);
-                    nameArray.push(address);
+                    clientArray.push(address);
 
                     if (!theirAddress) {
                         output("Not a valid address: ");
@@ -59,7 +61,7 @@ async function main() {
 
                     let purchaseDate = await input("Please enter your purchase date YYYY-MM-DD: ");
                     dateOfPurchase = checkDate(purchaseDate);
-                    nameArray.push(purchaseDate);
+                    clientArray.push(purchaseDate);
 
                     if (!dateOfPurchase) {
                         output("That is not a valid date:");
@@ -75,7 +77,7 @@ async function main() {
 
                     let brand = await input("Please enter brand of the vehicle: ");
                     theirBrand = checkBrand(brand);
-                    nameArray.push(brand);
+                    clientArray.push(brand);
 
                     if (!theirBrand) {
                         output("Is not a valid brand! Please selecta valid brand: ");
@@ -88,9 +90,9 @@ async function main() {
                 let vehicleModel = false;
                 while (!vehicleModel) {
 
-                    let models = await input("Please choose your Model you've selected: ");
+                    let models = await input("Please choose your model you've selected: ");
                     vehicleModel = checkMake(models);
-                    nameArray.push(models);
+                    clientArray.push(models);
 
                     if (!vehicleModel) {
                         output("Not a brand, please select the right brand: ");
@@ -104,7 +106,7 @@ async function main() {
 
                     let clientYear = await input("Please enter car year: YYYY-MM-DD: ");
                     theirYear = checkDate(clientYear);
-                    nameArray.push(clientYear);
+                    clientArray.push(clientYear);
 
                     if (!theirYear) {
                         output("Not a date! No month above 12 or days above 31: ");
@@ -113,14 +115,14 @@ async function main() {
                     }
                 }
 
-                
+
                 //VehicleVin
                 let vehicleVin = false;
                 while (!vehicleVin) {
 
                     let vins = await input("Please enter your VIN: ");
                     vehicleVin = carVin(vins);
-                    nameArray.push(vins);
+                    clientArray.push(vins);
 
                     if (!vehicleVin) {
                         output("Must be a valid VIN using only numerical or alphabetic: ");
@@ -131,26 +133,24 @@ async function main() {
                 break;
 
             case 2:
+           
+            let clientString = "";
+            for (let i = 0; i < clientArray.length; i++){
+                clientString += clientArray[i] + " ";
+            }
+            output(clientString)
 
-
-                for (let i = 1; i <= 10; i++) {
-                    nameArray.push(nameArray[0]);
-                }
-
-                for (row of nameArray) {
-                    output(row)
-                }
-
-                break;
-
-
-            case 3:
+           
+           break;
+           
+           case 3:
                 output("Have a good day!");
                 break;
 
             default:
                 output("That is not a valid menu choice.");
                 break;
+            
         }
     }
 
@@ -231,9 +231,9 @@ async function main() {
 
     function checkYear(inputValue) {
         let outputValue = false;
-        
+
         return Number(inputValue) >= 1900 && Number(inputValue <= new Date().getFullYear());
-    } 
+    }
 
     function carVin(inputValue) {
         let nameValue = true;
@@ -245,6 +245,12 @@ async function main() {
         }
         return nameValue;
     }
+
+
+    function userChoic ( title ) {
+        nameArray.push( title );
+        console.log( "Titles: " + nameArray.join(", ") );
+      }            
 
 
 }
