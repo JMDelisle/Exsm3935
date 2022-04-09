@@ -13,7 +13,7 @@ async function main() {
                 let theirName = false;
                 while (!theirName) {
 
-                    let firstName = await input("Please enter your first name: ");
+                    let firstName = await input("Please enter your first name: ",);
                     theirName = checkName(firstName);
                     clientArray.push(firstName);
 
@@ -30,7 +30,7 @@ async function main() {
                 let theirName2 = false;
                 while (!theirName2) {
 
-                    let lastName = await input("Please enter your last name: ");
+                    let lastName = await input("Please enter your last name: ",);
                     theirName2 = checkName(lastName);
                     clientArray.push(lastName);
 
@@ -44,7 +44,7 @@ async function main() {
                 let theirAddress = false;
                 while (!theirAddress) {
 
-                    let address = await input("Please enter your address: ");
+                    let address = await input("Please enter your address: ",);
                     theirAddress = validateMail(address);
                     clientArray.push(address);
 
@@ -59,7 +59,7 @@ async function main() {
                 let dateOfPurchase = false;
                 while (!dateOfPurchase) {
 
-                    let purchaseDate = await input("Please enter your purchase date YYYY-MM-DD: ");
+                    let purchaseDate = await input("Please enter your purchase date YYYY-MM-DD: ",);
                     dateOfPurchase = checkDate(purchaseDate);
                     clientArray.push(purchaseDate);
 
@@ -75,7 +75,7 @@ async function main() {
                 let theirBrand = false;
                 while (!theirBrand) {
 
-                    let brand = await input("Please enter brand of the vehicle: ");
+                    let brand = await input("Please enter brand of the vehicle: ",);
                     theirBrand = checkBrand(brand);
                     clientArray.push(brand);
 
@@ -90,7 +90,7 @@ async function main() {
                 let vehicleModel = false;
                 while (!vehicleModel) {
 
-                    let models = await input("Please choose your model you've selected: ");
+                    let models = await input("Please choose your model you've selected: ",);
                     vehicleModel = checkMake(models);
                     clientArray.push(models);
 
@@ -104,7 +104,7 @@ async function main() {
                 let theirYear = false;
                 while (!theirYear) {
 
-                    let clientYear = await input("Please enter car year: YYYY-MM-DD: ");
+                    let clientYear = await input("Please enter car year: YYYY-MM-DD: ",);
                     theirYear = checkDate(clientYear);
                     clientArray.push(clientYear);
 
@@ -120,7 +120,7 @@ async function main() {
                 let vehicleVin = false;
                 while (!vehicleVin) {
 
-                    let vins = await input("Please enter your VIN: ");
+                    let vins = await input("Please enter your VIN: ",);
                     vehicleVin = carVin(vins);
                     clientArray.push(vins);
 
@@ -136,10 +136,9 @@ async function main() {
            
             let clientString = "";
             for (let i = 0; i < clientArray.length; i++){
-                clientString += clientArray[i] + " ";
+                clientString += clientArray[i] + " ,\n";
             }
             output(clientString)
-
            
            break;
            
