@@ -1,4 +1,6 @@
 async function main() {
+    
+    
     let userChoice;
     let clientArray = [];
 
@@ -219,7 +221,7 @@ function checkBrand(nameCheck) {
 function checkMake(theirMake) {
     let makeValue = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (theirMake.match(makeValue)) {
-        B
+        
         return false;
     } else {
         return true;
@@ -230,7 +232,7 @@ function checkMake(theirMake) {
 function checkYear(inputValue) {
     let outputValue = false;
 
-    return Number(inputValue) >= 1900 && Number(inputValue <= new Date().getFullYear());
+    return Number(inputValue) >= 1900 && Number(inputValue <= new Date().getFullYear()+1);
 }
 
 function carVin(inputValue) {
