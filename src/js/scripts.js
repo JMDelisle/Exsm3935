@@ -127,7 +127,7 @@ async function main() {
                     vehicleVin = carVin(vins);
 
                     if (!vehicleVin) {
-                        output("Must be a valid VIN using only numerical or alphabetic: ");
+                        output("Must be a valid VIN using only numerical or uppercase letters: ");
                     } else {
                         clientArray.push(vins);
                         output("Your vehicle VIN is: " + vins);
@@ -235,13 +235,49 @@ function checkYear(inputValue) {
     return Number(inputValue) >= 1900 && Number(inputValue <= new Date().getFullYear()+1);
 }
 
-function carVin(inputValue) {
+/*function carVin(inputValue) {
     let nameValue = true;
 
     if (inputValue.length != 17) {
         nameValue = false;
-    } else if (inputValue.match("^[A-Z0-9]*$") == null); {
+    } else if (inputValue.match("^[A-Z0-9]*$").toUpperCase()); {
 
     }
     return nameValue;
+}*/
+
+function carVin(vin)
+{
+  function isnumeric(mixed_var) {
+    return (typeof(mixed_var) === 'number' || typeof(mixed_var) === 'string') && mixed_var !== '' && !isNaN(mixed_var);
+  }
+  var pattern = /^[^\Wioq]{17}$/;
+  var weights = Array(8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2);
+  var transliterations = {
+    "a" : 1, "b" : 2, "c" : 3, "d" : 4,
+    "e" : 5, "f" : 6, "g" : 7, "h" : 8,
+    "j" : 1, "k" : 2, "l" : 3, "m" : 4,
+    "n" : 5, "p" : 7, "r" : 9, "s" : 2,
+    "t" : 3, "u" : 4, "v" : 5, "w" : 6,
+    "x" : 7, "y" : 8, "z" : 9
+  };
+
+  vin = vin.toLowerCase();
+  if(!vin.match(pattern)) { return false; }
+
+  var sum = 0;
+  for(var i=0; i<vin.length; i++) {
+    if(!isnumeric(vin.charAt(i))) {
+      sum += transliterations[vin.charAt(i)] * weights[i];
+    } else {
+      sum += parseInt(vin.charAt(i)) * weights[i];
+    }  
+  }
+
+  var checkdigit = sum % 11;
+  if(checkdigit == 10) { // check digit of 10 represented by X
+    checkdigit = 'x';
+  }
+
+  return (checkdigit == vin.charAt(8));
 }
