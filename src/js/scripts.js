@@ -188,7 +188,7 @@ function checkDate(inputValue)
 }
 
 function checkName(nameCheck) {
-    let nameValue = /[0-9]+/;
+    let nameValue = /[^"0-9]+/;
     if (nameCheck.match(nameValue)) {
         return false;
     } else {
